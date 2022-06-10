@@ -34,12 +34,6 @@ server_t *init_server(char *ip_addr, int port)
     acc = accept(server->socket, &server->addr, sizeof(server->addr));
     rec = recv(server->socket, buf, 6000, 0);
     FD_SET(server->socket, &fds);
-    int sel = select(&fds, &rfds, &wfds, NULL, NULL);
-    server->fd_array[sizeof(server->fd_array)] = sel;
-    if (FD_ISSET(sel, &fds) != 0) {
-        printf("error");
-        return server;
-    }
 
     return server;
 }
